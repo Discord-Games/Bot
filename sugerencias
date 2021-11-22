@@ -1,0 +1,26 @@
+module.exports = {
+        name: 'sugerencia',
+        aliases: ['suge'],
+        utilisation: '{prefix}sugerencia',
+        execute(client, message) {
+                        let tema = args[0];  //El primer argumento seria el tema
+                        let sugerencia = args.slice(1).join(' ');  //El segundo seria la sugerencia
+                        let canal = client.channels.cache.get('912116306113875978');  //Canal donde se mandara la sugerencua
+                        const sugerenciaa = new MessageEmbed()  //hacemos el mensaje embed
+                        .setAuthor(`Autor: ${message.author.tag}`, message.author.displayAvatarURL())
+                        .setDescription(`**Tema:** ${tema}\n**Sugerencia:** ${sugerencia}`)
+                        .setColor(0xeaff00)
+                        .setThumbnail(client.user.displayAvatarURL())
+                        .setFooter("BotDePrueba | V1", client.user.displayAvatarURL());
+                        message.reply("sugerencia enviada con exito!").then(msg => msg.delete({timeout: 5000}));
+                        message.author.send("Tu sugerencia sera examinada por la Administracion. Gracias");
+                        canal.send(sugerenciaa).then(m => { //Agregamos reacciones a la sugerencia a su gusto!
+                            m.react('💎')
+                            m.react('✅')
+                            m.react('❔')
+                            m.react('❎')
+                            m.react('💩')
+                         })
+                         message.delete()  //Eliminamos el comando enviado
+                    }                                       
+};                                     
